@@ -1,0 +1,190 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * IRONHAND BARBER STUDIO — design system
+ * Matte black / charcoal / off-white / warm beige with a restrained bronze accent.
+ * All colors are oklch tokens; never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-bronze: var(--bronze);
+  --color-beige: var(--beige);
+  --color-charcoal: var(--charcoal);
+  --color-success: var(--success);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --background: oklch(0.15 0.004 60);
+  --foreground: oklch(0.95 0.008 85);
+  --charcoal: oklch(0.22 0.005 60);
+  --card: oklch(0.2 0.005 60);
+  --card-foreground: oklch(0.95 0.008 85);
+  --popover: oklch(0.2 0.005 60);
+  --popover-foreground: oklch(0.95 0.008 85);
+
+  --primary: oklch(0.95 0.008 85);
+  --primary-foreground: oklch(0.15 0.004 60);
+  --secondary: oklch(0.26 0.006 60);
+  --secondary-foreground: oklch(0.95 0.008 85);
+  --muted: oklch(0.24 0.005 60);
+  --muted-foreground: oklch(0.68 0.012 80);
+  --accent: oklch(0.7 0.088 72);
+  --accent-foreground: oklch(0.15 0.004 60);
+  --bronze: oklch(0.7 0.088 72);
+  --beige: oklch(0.86 0.031 82);
+  --destructive: oklch(0.62 0.2 25);
+  --destructive-foreground: oklch(0.97 0.005 85);
+  --success: oklch(0.72 0.13 155);
+
+  --border: oklch(0.3 0.006 60);
+  --input: oklch(0.3 0.006 60);
+  --ring: oklch(0.7 0.088 72);
+
+  --gradient-fade: linear-gradient(
+    to top,
+    var(--background) 0%,
+    color-mix(in oklab, var(--background) 70%, transparent) 40%,
+    transparent 100%
+  );
+  --shadow-editorial: 0 30px 80px -40px oklch(0 0 0 / 0.9);
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--color-bronze);
+    color: var(--color-primary-foreground);
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-bronze);
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  font-size: clamp(2.75rem, 9vw, 7.5rem);
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5.5vw, 4.25rem);
+}
+
+@utility serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+@utility fade-overlay {
+  background-image: var(--gradient-fade);
+}
+
+@utility hover-zoom {
+  overflow: hidden;
+  & img {
+    transition: transform 0.9s var(--ease-cinematic);
+  }
+  &:hover img {
+    transform: scale(1.06);
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-cinematic),
+    transform 0.9s var(--ease-cinematic);
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
